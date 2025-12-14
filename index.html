@@ -3,18 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Student Bento Grid - UMT Food Technology</title>
+    <title>Student Bento Grid - UMT Food Technology (Updated)</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
     
     <style>
         /* CSS Reset and Global Styles */
         :root {
             --color-white: #ffffff;
-            --color-light-grey: #f4f4f5; /* Zinc 100 */
-            --color-medium-grey: #a1a1aa; /* Zinc 400 */
-            --color-dark-grey: #18181b; /* Zinc 900 */
-            /* UPDATED: Deep Ocean Blue accent color */
-            --color-accent: #0077b6; 
+            --color-light-grey: #f4f4f5; 
+            --color-medium-grey: #a1a1aa; 
+            --color-dark-grey: #18181b; 
+            --color-accent: #0077b6; /* Deep Ocean Blue */
             --font-family: 'Inter', sans-serif;
             --border-radius: 12px;
             --spacing: 16px;
@@ -40,9 +39,8 @@
             gap: var(--spacing);
             max-width: 1200px;
             margin: 0 auto;
-            /* Desktop Grid Definition */
             grid-template-columns: repeat(6, 1fr);
-            grid-template-rows: auto;
+            grid-template-rows: auto auto auto; 
         }
 
         /* Card Base Style */
@@ -55,7 +53,15 @@
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            overflow: hidden; 
+            overflow: hidden;
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+            cursor: default; 
+        }
+        
+        .card:hover {
+            transform: scale(1.02); 
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 
+                        0 4px 6px -4px rgba(0, 0, 0, 0.1);
         }
 
         .card h3 {
@@ -82,6 +88,29 @@
         .card-profile {
             grid-column: span 4;
             grid-row: span 2;
+            
+            /* === BACKGROUND IMAGE STYLES ADDED HERE === */
+            /* Using a linear gradient over the image for better text contrast */
+            background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5)), url('bg.jpg');
+            background-size: cover;          
+            background-position: center;     
+            background-repeat: no-repeat;    
+            /* Override default card color to white for contrast */
+            color: var(--color-white); 
+        }
+        
+        /* Ensure specific profile text elements are also white/accented for readability */
+        .card-profile .profile-data h1,
+        .card-profile .profile-data p,
+        .card-profile .profile-tagline {
+            color: var(--color-white); 
+        }
+        .card-profile .accent-text {
+            color: #4dc2ff; /* Lighter shade of blue for contrast against dark overlay */
+        }
+        .card-profile .social-links a {
+            color: var(--color-white); 
+            text-decoration: underline;
         }
 
         /* Card 2 (Location): Small box (2x1) */
@@ -99,18 +128,27 @@
             grid-column: span 2;
         }
 
-        /* Card 5 (Hobby): Small box (2x1). Positioned below Card 1 */
+        /* Card 5 (Hobby): Small box (1x2) - Now 1 column wide, spanning 2 rows (next to reflection) */
         .card-hobby {
-            grid-column: span 2;
+            grid-column: span 1;
+            grid-row: 3 / 4; 
         }
+        
+        /* New Reflection Card (5x1) - Next to Hobby */
+        .card-reflection {
+            grid-column: span 5;
+            grid-row: 3 / 4; 
+        }
+
 
         /* Card 6 (Playlist): Wide box at the bottom (6x1) */
         .card-playlist {
             grid-column: span 6;
+            grid-row: 4 / 5; 
             min-height: 80px; 
         }
         
-        /* Specific content styling */
+        /* Specific content styling (rest of the styles) */
         .social-links {
             margin-top: 1.5rem;
             display: flex;
@@ -118,6 +156,7 @@
         }
 
         .social-links a {
+            /* Kept general styling for non-profile links */
             color: var(--color-accent);
             text-decoration: none;
             font-weight: 500;
@@ -158,21 +197,26 @@
         .card-playlist h3 {
             margin: 0;
         }
+        
+        .reflection-content {
+            font-size: 1rem;
+            line-height: 1.5;
+            color: var(--color-dark-grey);
+        }
 
         /* --- Mobile Responsiveness (Vertical Stacking) --- */
         @media (max-width: 768px) {
             .bento-grid {
-                /* On mobile, all items stack in a single column */
                 grid-template-columns: 1fr;
                 gap: 10px;
             }
 
-            /* All cards take up the full width (1 column) on mobile */
             .card-profile,
             .card-location,
             .card-tech-stack,
             .card-case-study,
             .card-hobby,
+            .card-reflection, 
             .card-playlist {
                 grid-column: span 1;
                 grid-row: auto;
@@ -188,6 +232,12 @@
             
             .profile-tagline {
                 font-size: 1rem;
+            }
+            
+             .card:hover {
+                transform: none;
+                box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 
+                            0 2px 4px -2px rgba(0, 0, 0, 0.05);
             }
         }
     </style>
@@ -212,9 +262,9 @@
                 </div>
             </div>
             <div class="social-links">
-                <a href="#">LinkedIn Profile</a>
-                <a href="#">GitHub Repo</a>
-                <a href="#">UMT Portal</a>
+                <a href="#" target="_blank">LinkedIn Profile</a>
+                <a href="#" target="_blank">GitHub Repo</a>
+                <a href="#" target="_blank">UMT Portal</a>
             </div>
         </div>
 
@@ -224,7 +274,7 @@
                 <p>UMT Campus, Kuala Nerus</p>
             </div>
             <div class="time">
-                14:34
+                15:15
             </div>
         </div>
 
@@ -254,6 +304,13 @@
             <h3>Current Hobby</h3>
             <p class="accent-text">Music & Relaxation</p>
             <p>Listening to music, primarily Lo-Fi and instrumental tracks during study sessions.</p>
+        </div>
+        
+        <div class="card card-reflection">
+            <h3>Why Food Tech Matters in Malaysia</h3>
+            <p class="reflection-content">
+                <span class="accent-text">Sustainable food security</span> is crucial for our future. By optimizing local processing methods, we can reduce waste and improve nutrition across the nation.
+            </p>
         </div>
         
         <div class="card card-playlist">
